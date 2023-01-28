@@ -4,6 +4,8 @@ FROM php:8.1-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    curl\
+    wget\
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
@@ -36,10 +38,10 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
-COPY ./src /var/www/html
+COPY ./project /var/www/html
 
 # Copy existing application directory permissions
-COPY --chown=www:www ./src /var/www/html
+COPY --chown=www:www ./project /var/www/html
 
 # Change current user to www
 USER www
